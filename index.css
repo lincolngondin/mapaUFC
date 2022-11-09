@@ -1,3 +1,7 @@
+:root{
+    --button-size: 10%;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -9,7 +13,7 @@ html, body {
     width: 100vw;
 }
 #map{
-    height: 90%;
+    height: calc(100% - var(--button-size));
     width: 100vw;
 }
 .levelButtonContainer{
@@ -42,17 +46,19 @@ html, body {
     background-color: blueviolet;
 }
 
-.names{
-    color:gray;
-    font-weight: bold;
-    font-size: min(3em, 1.5em);
-    background-color: transparent;
-   
+
+.names>p{
+    width:100px;
+    color:#7A7A7A;
+    font-weight: 600;
+    font-size: 1em;
+    margin-left: -100%;
+    margin-top: -100%;
 }
 #controls{
     display: flex;
     flex-direction: row;
-    height: 10%;
+    height: var(--button-size);
     width: 100vw;
 }
 .controls_button{
@@ -63,16 +69,19 @@ html, body {
     justify-content: center;
     align-items: center;
     font-weight: bolder;
-    background-color: #fff;
+    background-color: #eee;
+    font-family: monospace;
     user-select: none;
-    color:#555;
-    font-size: .9em;
+    color:black;
+    font-size: 1.1em;
+    font-weight: bold;
+    border:1px solid #ddd;
 }
 p{
     margin:0;
 }
 .controls_button:active{
-    background-color: #888;
+    background-color: #ddd;
 }
 .controls_button > img{
     display: block;

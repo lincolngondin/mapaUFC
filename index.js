@@ -10,7 +10,8 @@ let mapOptions = {
     maxBounds: [
         [-3.67694, -40.37051],
         [-3.70407, -40.32205]
-    ]
+    ],
+    zoomSnap: 0.5
 }
 const map = L.map('map', mapOptions)
 map.setView([-3.6932203,-40.3543455], 18);
@@ -23,41 +24,61 @@ const scale = L.control.scale({
 }).addTo(map);
 
 function styleMap(feature){
-    //console.log(feature)
+
     let opcao = {
 
     }
     opcao.fillOpacity = 0;
+    opcao.color = '#808080';
+    opcao.weight = 2;
+    
     if(feature.properties.indoor === 'room'){
         opcao.fill = true
-        opcao.fillColor = '#9fc9f7'
+        opcao.fillColor = '#FEFEE2'
         opcao.fillOpacity = 1;
         opcao.stroke = true;
+        opcao.weight = 2;
+        opcao.color = '#808080';
     }
+    if(feature.properties.room !== undefined){
+        opcao.fillColor = "#D4EDFF";
+    }
+    if(feature.properties.indoor !== "room"){
+        opcao.fillOpacity = 1;
+        opcao.weight = 1;
+        opcao.fillColor = "#FDFCFA";
+    }
+    if(feature.properties.stairs === "yes"){
+        opcao.weight = 10;
+        opcao.dashArray = "4 10";
+        opcao.lineCap = "miter";
+    }
+    if(feature.properties.indoor === "wall"){
+        opcao.fillColor = "#F2EBE3";
+        opcao.weight = 3;
+    }
+    
     return opcao;
+}
+
+/* Funcao que filtra as informações a ser exibida */
+function filtrar(feature){
+    return feature.properties.level === levelSelecionado  && feature.geometry.type !== "Point" && feature.properties.indoor !== undefined;
 }
 
 /* Adiciona as informações do campus mucabinho no mapa */
 const geo = L.geoJSON(blocoEngenharia, {
     style: styleMap,
-    filter: function(feature){
-        return feature.properties.level === levelSelecionado  && feature.geometry.type !== "Point";
-    },
-    pointToLayer: function(geoJsonPoint, latlng) {
-        return L.marker(latlng);
-    }
+    filter: filtrar,
+    interactive: false
 }).addTo(map);
 
 /* Adiciona as informações da famed no mapa */
 const famedGeojson = L.geoJson(famed, {
     style: styleMap,
-    filter: function(feature){
-        return feature.properties.level === levelSelecionado  && feature.geometry.type !== "Point";
-    },
-    
+    filter: filtrar
 }).addTo(map);
 
-const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
 
 
 
@@ -91,22 +112,23 @@ map.addControl(myL);
 const niveisMucab = ObterNiveis(blocoEngenharia.features);
 const andares = {};
 for(let i = 0; i < niveisMucab.length; i++){
-    andares[niveisMucab[i]] = L.layerGroup();
+    andares[niveisMucab[i]] = L.layerGroup([], {
+        interactive: false
+    });
 }
-console.log(andares)
+
 for(let feature of blocoEngenharia.features){
     
     if(feature.properties.name !== undefined && feature.properties.indoor === "room" && feature.geometry.type === "LineString" && feature.properties.level !== undefined){
         let a = L.latLng(feature.geometry.coordinates[0]);
         let c = CentroGeometrico(feature.geometry.coordinates);
-        //console.log(feature)
         let icon = L.divIcon({
             html: `<p>${feature.properties.name}</p>`,
             className: "names"
         });
         let mrr = L.marker([c.lng, c.lat], {
             icon:icon,
-            interactive: false
+            interactive:false
         });
         andares[feature.properties.level].addLayer(mrr);
     }
@@ -114,8 +136,7 @@ for(let feature of blocoEngenharia.features){
 
 map.on("zoom", function(evento){
     let zoom = evento.target._zoom;
-    console.log(zoom)
-    if(zoom < 19){
+    if(zoom < 21){
         for(nivel of niveisMucab){
             andares[nivel].remove();
         }
@@ -141,17 +162,23 @@ const fn = ()=>{
     andares[levelSelecionado].addTo(map);
 }
 
+const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
 var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: cartodbAttribution
+    attribution: cartodbAttribution,
+    maxZoom:24,
+    maxNativeZoom: 24,
+    interactive:false
 });
 
 const stamenLayer = L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",{
-    attribution: "STAMEN"
-})
-
+    attribution: "STAMEN",
+    maxZoom:24,
+    maxNativeZoom: 17,
+    interactive:false
+});
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 22,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    interactive:false
 }).addTo(map);
 
 var myIcon = L.icon({
