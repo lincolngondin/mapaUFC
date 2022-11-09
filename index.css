@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    width: 100vw;
+}
+.levelButtonContainer{
+    min-width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.levelButton{
+    width:40px;
+    height: 40px;
+    background-color: darkslategray;
+    margin:2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.levelButton>p{
+    color:white;
+    font-weight: 200;
+    font-size: 1.4em;
+}
+.levelButtonSelecionado{
+    background-color: darkblue;
+}
+
+.test{
+    background-color: blueviolet;
+}
+
+.names{
+    color:darkgreen;
+    font-weight: bold;
+    font-size: min(3em, 1.5em);
+    background-color: transparent;
+   
+}
+#controls{
+    display: flex;
+    flex-direction: row;
+}
+.controls_button{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border:1px solid #ff7;
+    background-color: #fff;
+}
+.controls_button:active{
+    background-color: #ff7;
+}
