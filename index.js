@@ -15,6 +15,12 @@ let mapOptions = {
 const map = L.map('map', mapOptions)
 map.setView([-3.6932203,-40.3543455], 18);
 
+/* Adiciona a escala */
+const scale = L.control.scale({
+    metric: true,
+    maxWidth: 100,
+    imperial: false
+}).addTo(map);
 
 function styleMap(feature){
     //console.log(feature)
@@ -31,6 +37,7 @@ function styleMap(feature){
     return opcao;
 }
 
+/* Adiciona as informações do campus mucabinho no mapa */
 const geo = L.geoJSON(blocoEngenharia, {
     style: styleMap,
     filter: function(feature){
@@ -41,21 +48,25 @@ const geo = L.geoJSON(blocoEngenharia, {
     }
 }).addTo(map);
 
+/* Adiciona as informações da famed no mapa */
+const famedGeojson = L.geoJson(famed, {
+    style: styleMap,
+    filter: function(feature){
+        return feature.properties.level === levelSelecionado  && feature.geometry.type !== "Point";
+    },
+    
+}).addTo(map);
 
 const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
 
-var a = L.control.scale({
-    metric: true,
-    maxWidth: 100,
-    imperial: false
-}).addTo(map);
+
 
 
 
 const LayerButton = L.Control.extend({
     onAdd: function(){
         let buttonContainer = L.DomUtil.create("div", "levelButtonContainer");
-        let levels = ["-1", "0", "1", "2"];
+        let levels = ObterNiveis(blocoEngenharia.features);
         for(let i = 0; i < levels.length; i++){
             let bt = L.DomUtil.create("div", "levelButton", buttonContainer);
             L.DomEvent.on(bt, "click", ()=>{
@@ -77,11 +88,57 @@ const myL = new LayerButton({
 });
 map.addControl(myL);
 
+const niveisMucab = ObterNiveis(blocoEngenharia.features);
+const andares = {};
+for(let i = 0; i < niveisMucab.length; i++){
+    andares[niveisMucab[i]] = L.layerGroup();
+}
+console.log(andares)
+for(let feature of blocoEngenharia.features){
+    
+    if(feature.properties.name !== undefined && feature.properties.indoor === "room" && feature.geometry.type === "LineString" && feature.properties.level !== undefined){
+        let a = L.latLng(feature.geometry.coordinates[0]);
+        let c = CentroGeometrico(feature.geometry.coordinates);
+        //console.log(feature)
+        let icon = L.divIcon({
+            html: `<p>${feature.properties.name}</p>`,
+            className: "names"
+        });
+        let mrr = L.marker([c.lng, c.lat], {
+            icon:icon,
+            interactive: false
+        });
+        andares[feature.properties.level].addLayer(mrr);
+    }
+}
+
+map.on("zoom", function(evento){
+    let zoom = evento.target._zoom;
+    console.log(zoom)
+    if(zoom < 19){
+        for(nivel of niveisMucab){
+            andares[nivel].remove();
+        }
+    }
+    else{
+        for(nivel of niveisMucab){
+            andares[nivel].remove();
+        }
+        andares[levelSelecionado].addTo(map);
+    }
+});
+
 const fn = ()=>{
     map.removeControl(myL);
     map.addControl(myL);
     geo.clearLayers();
     geo.addData(blocoEngenharia);
+    famedGeojson.clearLayers();
+    famedGeojson.addData(famed);
+    for(nivel of niveisMucab){
+        andares[nivel].remove();
+    }
+    andares[levelSelecionado].addTo(map);
 }
 
 var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -120,21 +177,7 @@ mk.bindPopup(dv)
 
 //const toolTip = L.tooltip([-3.6942203,-40.3543455], {content: '<h1>Lincoln</h1>', className: "test"}).addTo(map);
 
-for(let feature of blocoEngenharia.features){
-    if(feature.properties.indoor === "room" && feature.geometry.type === "LineString" && feature.properties.level === '0'){
-        let a = L.latLng(feature.geometry.coordinates[0]);
-        console.log(feature)
-        let icon = L.divIcon({
-            html: `<p>${feature.properties.name}</p>`,
-            className: "names"
-        });
-        L.marker([a.lng, a.lat], {
-            icon:icon,
-            interactive: false
-        }).addTo(map);
 
-    }
-}
 
 document.querySelector(".button_mucab").onclick = ()=>{
     map.flyTo([-3.693466, -40.354933], 17.97);
