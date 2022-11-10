@@ -58,6 +58,13 @@ function styleMap(feature){
         opcao.fillColor = "#F2EBE3";
         opcao.weight = 3;
     }
+    if(feature.properties.amenity !== undefined || feature.properties.leisure !== undefined){
+        opcao.fillColor = "#D4EDFF";
+    }
+    if(feature.properties.indoor === "corridor"){
+        opcao.fillColor = "#FDFCFA";
+    }
+    
     
     return opcao;
 }
@@ -77,7 +84,8 @@ const geo = L.geoJSON(blocoEngenharia, {
 /* Adiciona as informações da famed no mapa */
 const famedGeojson = L.geoJson(famed, {
     style: styleMap,
-    filter: filtrar
+    filter: filtrar,
+    interactive: false
 }).addTo(map);
 
 
@@ -92,7 +100,10 @@ const fn = ()=>{
     for(nivel of niveisMucab){
         andares[nivel].remove();
     }
-    //andares[levelSelecionado].addTo(map);
+    if(map.getZoom() > 21){
+        andares[levelSelecionado].addTo(map);
+    }
+    
 }
 
 /* Extende a classe controle para criar um controle de andar */
@@ -134,15 +145,17 @@ for(let i = 0; i < niveisMucab.length; i++){
 for(let feature of blocoEngenharia.features){
     
     if(feature.properties.name !== undefined && feature.properties.indoor === "room" && feature.geometry.type === "LineString" && feature.properties.level !== undefined){
-        let a = L.latLng(feature.geometry.coordinates[0]);
         let c = CentroGeometrico(feature.geometry.coordinates);
         let icon = L.divIcon({
             html: `<p>${feature.properties.name}</p>`,
-            className: "names"
+            className: "names",
+            iconSize: L.point(100, 100),
+            iconAnchor: L.point(50,50)
         });
         let mrr = L.marker([c.lng, c.lat], {
             icon:icon,
-            interactive:false
+            interactive:false,
+            keyboard: false
         });
         andares[feature.properties.level].addLayer(mrr);
     }
@@ -159,9 +172,39 @@ map.on("zoom", function(evento){
         for(nivel of niveisMucab){
             andares[nivel].remove();
         }
-        //andares[levelSelecionado].addTo(map);
+        andares[levelSelecionado].addTo(map);
+    }
+    if(zoom < 17){
+        famedGeojson.remove();
+        geo.remove();
+    }
+    else{
+        famedGeojson.addTo(map);
+        geo.addTo(map);
     }
 });
+
+
+let centroMucambinho = L.latLng([-3.6934337,-40.354892]);
+let limitesMucabinho = centroMucambinho.toBounds(210);
+let centroFamed = L.latLng([-3.681489,-40.336803]);
+let limitesFamed = centroFamed.toBounds(150);
+
+
+map.on("move", function(evento){
+    if(!map.getBounds().intersects(limitesMucabinho)){
+        geo.remove();
+    }
+    else{
+        geo.addTo(map);
+    }
+    if(!map.getBounds().intersects(limitesFamed)){
+        famedGeojson.remove();
+    }
+    else{
+        famedGeojson.addTo(map);
+    }
+})
 
 
 
