@@ -145,7 +145,7 @@ map.on("zoom", function(evento){
         for(nivel of niveisMucab){
             andares[nivel].remove();
         }
-        andares[levelSelecionado].addTo(map);
+        //andares[levelSelecionado].addTo(map);
     }
 });
 
@@ -159,7 +159,7 @@ const fn = ()=>{
     for(nivel of niveisMucab){
         andares[nivel].remove();
     }
-    andares[levelSelecionado].addTo(map);
+    //andares[levelSelecionado].addTo(map);
 }
 
 const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
@@ -168,7 +168,7 @@ var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/
     maxZoom:24,
     maxNativeZoom: 24,
     interactive:false
-});
+}).addTo(map);
 
 const stamenLayer = L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png",{
     attribution: "STAMEN",
@@ -178,8 +178,10 @@ const stamenLayer = L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner/{z}
 });
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    interactive:false
-}).addTo(map);
+    interactive:false,
+    maxZoom:24,
+    maxNativeZoom: 18,
+});
 
 var myIcon = L.icon({
     iconUrl: 'icons/a1.png',
