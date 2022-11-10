@@ -20,7 +20,8 @@ map.setView([-3.6932203,-40.3543455], 18);
 const scale = L.control.scale({
     metric: true,
     maxWidth: 100,
-    imperial: false
+    imperial: false,
+    position: "topright"
 }).addTo(map);
 
 function styleMap(feature){
@@ -81,29 +82,42 @@ const famedGeojson = L.geoJson(famed, {
 
 
 
+const fn = ()=>{
+    map.removeControl(myL);
+    map.addControl(myL);
+    geo.clearLayers();
+    geo.addData(blocoEngenharia);
+    famedGeojson.clearLayers();
+    famedGeojson.addData(famed);
+    for(nivel of niveisMucab){
+        andares[nivel].remove();
+    }
+    //andares[levelSelecionado].addTo(map);
+}
 
-
-
+/* Extende a classe controle para criar um controle de andar */
 const LayerButton = L.Control.extend({
     onAdd: function(){
-        let buttonContainer = L.DomUtil.create("div", "levelButtonContainer");
+        let buttonContainer = L.DomUtil.create("div", "level-buttons");
         let levels = ObterNiveis(blocoEngenharia.features);
         for(let i = 0; i < levels.length; i++){
-            let bt = L.DomUtil.create("div", "levelButton", buttonContainer);
+            let bt = L.DomUtil.create("div", "level-buttons__button", buttonContainer);
             L.DomEvent.on(bt, "click", ()=>{
                 levelSelecionado = levels[i]
                 fn();
             })
             
-            let p = L.DomUtil.create("p", "", bt);
+            let p = L.DomUtil.create("p", "level-buttons__text", bt);
             if(levels[i] === levelSelecionado){
-                L.DomUtil.addClass(bt, "levelButtonSelecionado")
+                L.DomUtil.addClass(bt, "level-buttons__button--selected")
             }
             p.innerText = levels[i];
         }
         return buttonContainer;
     }
 });
+
+/* Cria uma instancia da nova classe de controle e adiciona no mapa */
 const myL = new LayerButton({
     position: "bottomright"
 });
@@ -149,18 +163,7 @@ map.on("zoom", function(evento){
     }
 });
 
-const fn = ()=>{
-    map.removeControl(myL);
-    map.addControl(myL);
-    geo.clearLayers();
-    geo.addData(blocoEngenharia);
-    famedGeojson.clearLayers();
-    famedGeojson.addData(famed);
-    for(nivel of niveisMucab){
-        andares[nivel].remove();
-    }
-    //andares[levelSelecionado].addTo(map);
-}
+
 
 const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
 var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -176,7 +179,7 @@ const stamenLayer = L.tileLayer("https://stamen-tiles.a.ssl.fastly.net/toner/{z}
     maxNativeZoom: 17,
     interactive:false
 });
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+const openStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     interactive:false,
     maxZoom:24,
@@ -204,13 +207,19 @@ const mk = L.marker([-3.6932203,-40.3543455], {
 
 mk.bindPopup(dv)
 
-//const toolTip = L.tooltip([-3.6942203,-40.3543455], {content: '<h1>Lincoln</h1>', className: "test"}).addTo(map);
+L.control.layers({
+    "Stamem": stamenLayer,
+    "CartoDB": positron,
+    "OpenStreetMap": openStreetMap
+}).addTo(map);
 
-
-
-document.querySelector(".button_mucab").onclick = ()=>{
+document.querySelector(".controls__button--mucab").onclick = ()=>{
     map.flyTo([-3.693466, -40.354933], 17.97);
+    document.querySelector(".controls__button--mucab").classList.add("controls__button--selected");
+    document.querySelector(".controls__button--famed").classList.remove("controls__button--selected");
 }
-document.querySelector(".button_famed").onclick = ()=>{
+document.querySelector(".controls__button--famed").onclick = ()=>{
     map.flyTo([-3.68137, -40.336832], 18.29);
+    document.querySelector(".controls__button--famed").classList.add("controls__button--selected");
+    document.querySelector(".controls__button--mucab").classList.remove("controls__button--selected");
 }

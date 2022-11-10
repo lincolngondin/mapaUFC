@@ -1,5 +1,5 @@
 :root{
-    --button-size: 10%;
+    --button-size: 8%;
 }
 
 body {
@@ -16,34 +16,35 @@ html, body {
     height: calc(100% - var(--button-size));
     width: 100vw;
 }
-.levelButtonContainer{
-    min-width: 50px;
+p{
+    margin:0;
+    padding: 0;
+}
+
+.level-buttons{
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: .5rem;
 }
-.levelButton{
-    width:40px;
-    height: 40px;
-    background-color: darkslategray;
-    margin:2;
+.level-buttons__button{
     display: flex;
     justify-content: center;
     align-items: center;
+    width:3.8rem;
+    aspect-ratio: 1;
+    background-color: rgb(17, 4, 139);
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: 2px 20px 44px -8px rgba(0,0,0,0.75);
 }
-.levelButton>p{
-    color:white;
-    font-weight: 200;
-    font-size: 1.4em;
+.level-buttons__button--selected{
+    background-color: rgb(17, 4, 80);
 }
-.levelButtonSelecionado{
-    background-color: darkblue;
-}
-
-.test{
-    background-color: blueviolet;
+.level-buttons__text{
+    color:whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2em;
 }
 
 
@@ -55,35 +56,36 @@ html, body {
     margin-left: -100%;
     margin-top: -100%;
 }
-#controls{
+
+.controls{
     display: flex;
     flex-direction: row;
     height: var(--button-size);
     width: 100vw;
 }
-.controls_button{
-    padding-top:10px;
+.controls__button{
     width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: bolder;
-    background-color: #eee;
+    background-color: black;
     font-family: monospace;
     user-select: none;
-    color:black;
+    color:gray;
     font-size: 1.1em;
-    font-weight: bold;
-    border:1px solid #ddd;
 }
-p{
-    margin:0;
+.controls__button--selected{
+    color: darkcyan;
+    background-color: #111;
 }
-.controls_button:active{
+
+.controls__button:active{
     background-color: #ddd;
 }
-.controls_button > img{
+.controls__button > img{
     display: block;
     height: 50%;
     aspect-ratio: 1;
