@@ -136,6 +136,7 @@ map.addControl(myL);
 
 const niveisMucab = ObterNiveis(blocoEngenharia.features);
 const andares = {};
+const copiaAndares = {};
 for(let i = 0; i < niveisMucab.length; i++){
     andares[niveisMucab[i]] = L.layerGroup([], {
         interactive: false
@@ -184,6 +185,26 @@ map.on("zoom", function(evento){
     }
 });
 
+/* Funcao chamada quando o mapa é movido */
+let removedLayers = [];
+function MOVEEND(evento){
+    let limiteAtual = map.getBounds();
+    let layers = andares[levelSelecionado].getLayers();
+    for(l of removedLayers){
+        andares[levelSelecionado].addLayer(l);
+    }
+    removedLayers = [];
+    for(l of layers){
+        if(!limiteAtual.contains(l.getLatLng())){
+            removedLayers.push(l);
+            l.remove(layers);
+        } 
+    }
+    
+    
+}
+
+map.on("moveend", MOVEEND);
 
 let centroMucambinho = L.latLng([-3.6934337,-40.354892]);
 let limitesMucabinho = centroMucambinho.toBounds(210);
