@@ -116,269 +116,55 @@ const icones = {
 }
 
 const iconpos = [
-    {
-        pos: L.latLng({lat: -3.693159958191622, lng: -40.354243496718375}),
-        level: "0",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.693159958191622, lng: -40.354243496718375}), {
-            content: `
-                <div>
-                    <h3>Banheiros</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.69324182456486, lng: -40.35465885391043}),
-        level: "0",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.69324182456486, lng: -40.35465885391043}), {
-            content: `
-                <div>
-                    <h3>Elevador</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:yellow">Meio Acessível</span></p>
-                </div>
-            `
-        })
-
-    },
-    {
-        pos: L.latLng({lat: -3.693327451999401, lng: -40.35408702654328}),
-        level: "0",
-        icone: icones.cadeirante[2],
-        popup: L.popup(L.latLng({lat: -3.693327451999401, lng: -40.35408702654328}), {
-            content: `
-                <div>
-                    <h3>Merendeiro</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.6931183508574192, lng: -40.35409882664681}),
-        level: "0",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.6931183508574192, lng: -40.35409882664681}), {
-            content: `
-                <div>
-                    <h3>Auditório</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:yellow">Meio Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.6932063437621787, lng: -40.3540377147305}),
-        level: "0",
-        icone: icones.cadeirante[2],
-        popup: L.popup(L.latLng({lat: -3.6932063437621787, lng: -40.3540377147305}), {
-            content: `
-                <div>
-                    <h3>Banheiro</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:red">Pouco Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693339762211707, lng: -40.3544853142617}),
-        level: "0",
-        icone: icones.cadeirante[0],
-        popup: L.popup(L.latLng({lat: -3.693339762211707, lng: -40.3544853142617}), {
-            content: `
-                <div>
-                    <h3>Portas das Salas</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:green">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Pouco Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Pouco Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Pouco Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Pouco Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693203027814058, lng: -40.354491004086256}),
-        level: "1",
-        icone: icones.cadeirante[2],
-        popup: L.popup(L.latLng({lat: -3.693203027814058, lng: -40.354491004086256}), {
-            content: `
-                <div>
-                    <h3>Corredores</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:red">Pouco Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}),
-        level: "1",
-        icone: icones.cadeirante[2],
-        popup: L.popup(L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}), {
-            content: `
-                <div>
-                    <h3>Gabinetes</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:yellow">Pouco Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:red">Pouco Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}),
-        level: "0",
-        icone: icones.cadeirante[0],
-        popup: L.popup(L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}), {
-            content: `
-                <div>
-                    <h3>Foyer</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.6927378812714955, lng: -40.35474799449504}),
-        level: "0",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.6927378812714955, lng: -40.35474799449504}), {
-            content: `
-                <div>
-                    <h3>Estacionamento</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693278239311699, lng: -40.3540612757206}),
-        level: "-1",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.693278239311699, lng: -40.3540612757206}), {
-            content: `
-                <div>
-                    <h3>Corredores da biblioteca</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:yellow">Meio Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693303786947998, lng: -40.354008317303666}),
-        level: "-1",
-        icone: icones.cadeirante[0],
-        popup: L.popup(L.latLng({lat: -3.693303786947998, lng: -40.354008317303666}), {
-            content: `
-                <div>
-                    <h3>Balcao da biblioteca</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:green">Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:green">Acessível</span></p>
-                </div>
-            `
-        })
-    },
-    {
-        pos: L.latLng({lat: -3.693342187876938, lng: -40.354042164981365}),
-        level: "-1",
-        icone: icones.visual[2],
-        popup: L.popup(L.latLng({lat: -3.693342187876938, lng: -40.354042164981365}), {
-            content: `
-                <div>
-                    <h3>Rampa</h3>
-                    <h3>Estado de acessibilidade:</h3>
-                    <p style="margin:0">VISUAL: <span style="color:red">Pouco Acessível</span></p>
-                    <p style="margin:0">CADEIRANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">MOBILIDADE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">GESTANTE: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">OBESO: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">BENGALA: <span style="color:yellow">Meio Acessível</span></p>
-                    <p style="margin:0">COM MULETA: <span style="color:yellow">Meio Acessível</span></p>
-                </div>
-            `
-        })
-    },
+    generateIconPos(L.latLng({lat: -3.693203027814058, lng: -40.354491004086256}), "1", "Corredores", icones.cadeirante[2], [0, 0, 0, 2, 1, 1, 0]),
+    generateIconPos(L.latLng({lat: -3.693339762211707, lng: -40.3544853142617}), "0", "Portas das Salas", icones.cadeirante[0], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.6932063437621787, lng: -40.3540377147305}), "0", "Banheiro", icones.cadeirante[2], [0, 0, 0, 0, 0, 0, 0]),
+    generateIconPos(L.latLng({lat: -3.6931183508574192, lng: -40.35409882664681}), "0", "Auditório", icones.visual[2], [0, 1, 1, 2, 1, 1, 1]),
+    generateIconPos(L.latLng({lat: -3.693327451999401, lng: -40.35408702654328}), "0", "Merendeiro", icones.cadeirante[2], [0, 0, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.69324182456486, lng: -40.35465885391043}), "0", "Elevador", icones.visual[2], [0, 1, 1, 1, 1, 1, 1]),
+    generateIconPos(L.latLng({lat: -3.693159958191622, lng: -40.354243496718375}), "0", "Banheiros", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}), "1", "Gabinetes", icones.cadeirante[2], [0, 0, 0, 1, 0, 1, 0]),
+    generateIconPos(L.latLng({lat: -3.693228575507798, lng: -40.35456070443696}), "0", "Foyer", icones.cadeirante[0], [2, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.6927378812714955, lng: -40.35474799449504}), "0", "Estacionamento", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.693278239311699, lng: -40.3540612757206}), "-1", "Corredores da biblioteca", icones.visual[2], [0, 0, 0, 1, 1, 1, 1]),
+    generateIconPos(L.latLng({lat: -3.693303786947998, lng: -40.354008317303666}), "-1", "Balcao da biblioteca", icones.cadeirante[0], [2, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.693342187876938, lng: -40.354042164981365}), "-1", "Rampa", icones.visual[2], [0, 1, 1, 1, 1, 1, 1]),
+    /// famed 
+    generateIconPos(L.latLng({lat: -3.6937765346989315, lng: -40.354579670518795}), "0", "Copa", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.6938214796861875, lng: -40.35473424408572}), "0", "Banheiros", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.6938467327515214, lng: -40.3545105457306}), "0", "Laboratório de informática", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.693676621779604, lng: -40.35443315753666}), "0", "Estacionamento", icones.cadeirante[0], [2, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.6937052040350187, lng: -40.354133024811745}), "0", "Recepção", icones.visual[2], [0, 1, 1, 1, 1, 1, 1]),
+    generateIconPos(L.latLng({lat: -3.6938842124520974, lng: -40.35431809723378}), "0", "Sala de Radiografia", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.694209458796248, lng: -40.354255350519516}), "0", "Almoxarifado", icones.visual[2], [0, 1, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.694208386745116, lng: -40.35441130399705}), "0", "Clínica", icones.visual[2], [0, 2, 2, 2, 2, 2, 2]),
+    generateIconPos(L.latLng({lat: -3.694168230028304, lng: -40.35458430647851}), "0", "Sala de Lavagem", icones.visual[2], [0, 1, 2, 2, 2, 2, 2]),
 ]
 
+function generateIconPos(pos, level, local, icone, acess){
+    textos = ["Pouco Acessível", "Meio Acessível", "Acessível"];
+    cores = ["red", "#f78f07", "green"];
+    return {
+        pos: pos,
+        level: level,
+        icone: icone,
+        popup: L.popup(pos, {
+            content: `
+                <div>
+                    <h3>${local}</h3>
+                    <h3>Estado de acessibilidade:</h3>
+                    <p style="margin:0">VISUAL: <span style="color:${cores[acess[0]]}">${textos[acess[0]]}</span></p>
+                    <p style="margin:0">CADEIRANTE: <span style="color:${cores[acess[1]]}">${textos[acess[1]]}</span></p>
+                    <p style="margin:0">MOBILIDADE: <span style="color:${cores[acess[2]]}">${textos[acess[2]]}</span></p>
+                    <p style="margin:0">GESTANTE: <span style="color:${cores[acess[3]]}">${textos[acess[3]]}</span></p>
+                    <p style="margin:0">OBESO: <span style="color:${cores[acess[4]]}">${textos[acess[4]]}</span></p>
+                    <p style="margin:0">BENGALA: <span style="color:${cores[acess[5]]}">${textos[acess[5]]}</span></p>
+                    <p style="margin:0">COM MULETA: <span style="color:${cores[acess[6]]}">${textos[acess[6]]}</span></p>
+                </div>
+            `
+        })
+    }
+}
 let iconesandares = {}
 
 function addIconsInLayerGroup(){
